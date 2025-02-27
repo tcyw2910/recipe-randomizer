@@ -4,11 +4,27 @@ import RecipeForm from './pages/RecipeForm';
 import RecipeList from "./pages/RecipeList";
 import Randomizer from "./pages/Randomizer";
 import './App.css'
-import { useState } from "react"; // Add useState to manage recipes
+import { useEffect, useState } from "react"; // Add useState to manage recipes
 
 
 function App() {
   const [recipes, setRecipes] = useState([]); // State for storing recipes
+
+  // Fetch recipes from the backend
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/recipes");
+        const data = await response.json();
+        console.log("Fetch recipes:", data);
+        setRecipes(data);
+      } catch (error) {
+        console.error("Error fetching recipes:", error);
+      }
+    };
+
+    fetchRecipes();
+  }, []); // Runs only on mount
 
   return (
     <Router>
@@ -22,4 +38,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

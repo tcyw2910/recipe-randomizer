@@ -7,21 +7,48 @@ function RecipeForm( {addRecipe} ) {
     const [description, setDescription] = useState("");
     const [ingredientInput, setIngredientInput] = useState("");
     const [instructionInput, setInstructionInput] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (title.trim() && description.trim() && ingredients.length > 0 && instructions.length > 0) {
-            addRecipe({ title, description, ingredients, instructions });
-            setTitle("");
-            setDescription("");
-            setIngredients([]);
-            setInstructions([]);
-            setIngredientInput("");
-            setInstructionInput("");
+            const newRecipe = { title, description, ingredients, instructions };
+
+            try {
+                const response = await fetch("http://localhost:5000/recipes", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json"},
+                    body: JSON.stringify(newRecipe),
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to add recipe");
+                }
+
+                const data = await response.json();
+                addRecipe((prevRecipes) => [...prevRecipes, data]); // Update state in App.js
+
+                // Set success message
+                setSuccessMessage("Recipe added successfully");
+
+                // Clear form after successful submission
+                setTitle("");
+                setDescription("");
+                setIngredients([]);
+                setInstructions([]);
+                setIngredientInput("");
+                setInstructionInput("");
+
+                // Hide the message after 3 seconds
+                setTimeout(() => setSuccessMessage(""), 3000);
+            } catch (error) {
+                console.error("Error adding recipe", error);
+            }
         }
     };
 
+    // Function - Add a list of ingredients
     const addIngredient = () => {
         if (ingredientInput.trim()) {
             setIngredients([...ingredients, ingredientInput.trim()]);
@@ -29,6 +56,7 @@ function RecipeForm( {addRecipe} ) {
         }
     };
 
+    // Function - Add a list of instructions
     const addInstruction = () => {
         if (instructionInput.trim()) {
             setInstructions([...instructions, instructionInput.trim()]);
@@ -61,6 +89,7 @@ function RecipeForm( {addRecipe} ) {
                     type="text"
                     value={ingredientInput}
                     onChange={(e) => setIngredientInput(e.target.value)}
+                    required
                 />
                 <button type="button" onClick={addIngredient}>Add Ingredient</button>
                 <ul>
@@ -76,6 +105,7 @@ function RecipeForm( {addRecipe} ) {
                     type="text"
                     value={instructionInput}
                     onChange={(e) => {setInstructionInput(e.target.value)}}
+                    required
                 />
                 <button type="button" onClick={addInstruction}>Add Instruction</button>
                 <ol>
@@ -86,6 +116,12 @@ function RecipeForm( {addRecipe} ) {
             </div>
 
             <button type="submit">Save Recipe</button>
+
+            {/* Successful Submission Message */}
+            {successMessage && <div className="success-message">{successMessage}</div>}
+
+            {/* Submission Error Message */}
+            
         </form>
     );
 }
