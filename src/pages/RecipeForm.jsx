@@ -64,6 +64,22 @@ function RecipeForm( {addRecipe} ) {
         }
     };
 
+    // Function to handle 'Enter' keypress for Instruction inputs
+    const handleInstructionKeyPress = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            addInstruction();
+        }
+    };
+
+    // Function to handle 'Enter' keypress for Ingredient inputs
+    const handleIngredientKeyPress = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            addIngredient();
+        }
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <h3>Recipe Title</h3>
@@ -89,6 +105,7 @@ function RecipeForm( {addRecipe} ) {
                     type="text"
                     value={ingredientInput}
                     onChange={(e) => setIngredientInput(e.target.value)}
+                    onKeyDown={handleIngredientKeyPress}
                 />
                 <button type="button" onClick={addIngredient}>Add Ingredient</button>
                 <ul>
@@ -104,6 +121,7 @@ function RecipeForm( {addRecipe} ) {
                     type="text"
                     value={instructionInput}
                     onChange={(e) => {setInstructionInput(e.target.value)}}
+                    onKeyDown={handleInstructionKeyPress}
                 />
                 <button type="button" onClick={addInstruction}>Add Instruction</button>
                 <ol>
