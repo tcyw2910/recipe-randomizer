@@ -89,7 +89,6 @@ function RecipeForm( {addRecipe} ) {
                     type="text"
                     value={ingredientInput}
                     onChange={(e) => setIngredientInput(e.target.value)}
-                    required
                 />
                 <button type="button" onClick={addIngredient}>Add Ingredient</button>
                 <ul>
@@ -105,7 +104,6 @@ function RecipeForm( {addRecipe} ) {
                     type="text"
                     value={instructionInput}
                     onChange={(e) => {setInstructionInput(e.target.value)}}
-                    required
                 />
                 <button type="button" onClick={addInstruction}>Add Instruction</button>
                 <ol>

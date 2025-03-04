@@ -21,6 +21,20 @@ function Randomizer({ recipes }) {
                 <div>
                     <h3>{randomRecipe.title}</h3>
                     <p>Description: {randomRecipe.description}</p>
+
+                    <h4>Ingredients</h4>
+                    <ul>
+                        {randomRecipe.ingredients.map((ingredient, index) => (
+                            <li key={index}>{ingredient}</li>
+                        ))}
+                    </ul>
+
+                    <h4>Instructions</h4>
+                    <ol>
+                        {randomRecipe.instructions.map((instruction, index) => (
+                            <li key={index}>{instruction}</li>
+                        ))}
+                    </ol>
                 </div>
             )}
         </div>
