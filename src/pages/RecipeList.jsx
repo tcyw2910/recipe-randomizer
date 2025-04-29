@@ -1,6 +1,6 @@
 import RecipeCard from "../components/RecipeCard";
 
-function RecipeList({ recipes }) {
+function RecipeList({ recipes, deleteRecipe}) {
     return (
         <div>
             <h2>Saved Recipes</h2>
@@ -9,7 +9,11 @@ function RecipeList({ recipes }) {
             ) : (
                 <div>
                     {recipes.map((recipe, index) => (
-                        <RecipeCard key={index} recipe={recipe} />
+                        <RecipeCard 
+                            key={index} 
+                            recipe={recipe} 
+                            deleteRecipe={deleteRecipe} 
+                        />
                     ))}
                 </div>
             )}

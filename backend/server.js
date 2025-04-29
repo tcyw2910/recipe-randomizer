@@ -54,3 +54,21 @@ app.post("/recipes", async (req, res) => {
         res.status(500).json({ error: "Failed to insert recipe" });
     }
 })
+
+// Delete route to remove a recipe by ID
+app.delete("/recipes/:id", async (req, res) => {
+    const { id } = req.params; // Extract id from request parameters
+    try {
+        const result = await pool.query("DELETE FROM recipes WHERE id = $1 RETURNING *", [id]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({error: "Recipe not found" });
+        }
+
+        // Send a success message and the deleted recipe info
+        res.json({ message: "Recipe deleted successfully", deletedRecipe: result.rows[0] })
+    } catch (err) {
+        console.error("Error deleting recipe: ", err);
+        res.status(500).json({ error: "Failed to delete recipe" });
+    } 
+});

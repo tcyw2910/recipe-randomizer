@@ -26,13 +26,34 @@ function App() {
     fetchRecipes();
   }, []); // Runs only on mount
 
+  // Function to delete a recipe
+  const deleteRecipe = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/recipes/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete recipe!");
+      } 
+
+      const data = await response.json();  // Get the response body from the server
+      alert(data.message);
+
+      // Update the state to remove the deleted recipe
+      setRecipes((prevRecipes) => prevRecipes.filter(recipe => recipe.id !== id));
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
+
   return (
     <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<Randomizer recipes={recipes} />}></Route>
         <Route path="/add-recipe" element={<RecipeForm addRecipe={setRecipes} />}></Route>
-        <Route path="/recipes" element={<RecipeList recipes={recipes} />}></Route>
+        <Route path="/recipes" element={<RecipeList recipes={recipes} deleteRecipe={deleteRecipe} />}></Route>
       </Routes>
     </Router>
   );

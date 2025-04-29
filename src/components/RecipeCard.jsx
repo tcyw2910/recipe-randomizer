@@ -1,6 +1,15 @@
 import PropTypes from "prop-types";
  
-function RecipeCard({ recipe }) {
+function RecipeCard({ recipe, deleteRecipe }) {
+    const handleDelete = () => {
+        // Ask for confirmation before deleting the recipe
+        const confirmed = window.confirm(`Are you sure you want to delete the recipe: "${recipe.title}"?`);
+
+        if (confirmed) {
+            deleteRecipe(recipe.id);
+        }
+    };
+    
     return (
         <div>
             <h3>{recipe.title}</h3>
@@ -18,7 +27,9 @@ function RecipeCard({ recipe }) {
                     <li key={index}>{instruction}</li>
                 ))}
             </ol>
+            <button onClick={(handleDelete)}>Delete</button>
         </div>
+        
     )
 }
 
