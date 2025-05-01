@@ -22,9 +22,9 @@ body {
 }
 
 .form-btns {
-    @apply border border-gray-700 rounded-xl hover:shadow-lg;
+    @apply border border-gray-700 border-2 rounded-lg hover:shadow-lg;
     background: #FA910C;
-    color: #2B2B2B;
+    color: #FDFFF8;
 }
 
 .underline-animation {
