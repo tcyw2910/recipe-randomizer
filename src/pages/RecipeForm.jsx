@@ -81,64 +81,117 @@ function RecipeForm( {addRecipe} ) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h3>Recipe Title</h3>
-            <input 
-                type="text"
-                placeholder="Recipe Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-            />
+        <div className="container mx-auto mt-5 text-center custom-border p-2 rounded-xl">
+            <div className="bg-red-500 p-4" style={{ background: '#EAA965' }}>
+                <form onSubmit={handleSubmit}>
+                    {/* Recipe Title */}
+                    <h3 className="form-headers">Recipe Title</h3>
+                    <div className="custom-border custom-form-input-style p-2 flex items-center justify-center">
+                        {/* User enters the name of the recipe here */}
+                        <input 
+                            type="text"
+                            placeholder="Recipe Title"
+                            className="form-fields w-full"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                        />
+                    </div>
+                    
+                    {/* Description of recipe */}
+                    <h3 className="form-headers">Description</h3>
+                    <div className="custom-border custom-form-input-style p-3 flex items-center justify-center pb-1">
+                        {/* User provides a short description on said recipe here */}
+                        <textarea 
+                            placeholder="Short description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                            className="form-fields w-full resize-y min-h-[100px] outline-none "
+                        />
+                    </div>
 
-            <h3>Description</h3>
-            <textarea 
-                placeholder="Short description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-            />
+                    <div>
+                        <div className="flex justify-center items-center">
+                            <div className="custom-border custom-form-input-style w-75">
+                                <div className="flex items-center justify-center gap-2">
+                                    <input 
+                                        placeholder="Add Ingredient"
+                                        type="text"
+                                        value={ingredientInput}
+                                        onChange={(e) => setIngredientInput(e.target.value)}
+                                        onKeyDown={handleIngredientKeyPress}
+                                        className="form-fields w-1/2 mt-2"
+                                    />
+                                    <button 
+                                        type="button" 
+                                        onClick={addIngredient} 
+                                        className="form-btns p-1 px-3"
+                                    >
+                                        Add Ingredient
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {/* If at least one item is detected in the list -> display container */}
+                        {ingredients.length > 0 && (
+                            <div className="flex justify-center items-center">
+                                <div className="custom-border custom-form-input-style p-2 w-100">
+                                    <ul className="p-2 rounded" style={{ background: '#ddd9cc' }}>
+                                        {ingredients.map((ingredient, index) => (
+                                            <li key={index}>{ingredient}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
+                    </div>
 
-            <div>
-                <input 
-                    placeholder="Add Ingredient"
-                    type="text"
-                    value={ingredientInput}
-                    onChange={(e) => setIngredientInput(e.target.value)}
-                    onKeyDown={handleIngredientKeyPress}
-                />
-                <button type="button" onClick={addIngredient}>Add Ingredient</button>
-                <ul>
-                    {ingredients.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
-                    ))}
-                </ul>
+                    <div className="flex justify-center items-center">
+                        <div className="custom-border custom-form-input-style p-2 w-150">
+                            <input 
+                                placeholder="Enter instructions"
+                                type="text"
+                                value={instructionInput}
+                                onChange={(e) => {setInstructionInput(e.target.value)}}
+                                onKeyDown={handleInstructionKeyPress}
+                                className="form-fields w-140"
+                            />
+                            <button 
+                                type="button" 
+                                onClick={addInstruction} 
+                                className="form-btns ml-2 p-1"
+                            >
+                                Add Instruction
+                            </button>
+                        </div>
+                    </div>  
+
+                    {/* If at least one item is detected in the list -> display container */}
+                    {instructions.length > 0 && (
+                        <div className="flex justify-center items-center">
+                            <div className="custom-border custom-form-input-style p-2 w-full">
+                                <ol className="p2 rounded" style={{ background: '#ddd9cc' }}>
+                                    {instructions.map((instruction, index) => (
+                                        <li key={index}>{instruction}</li>
+                                    ))}
+                                </ol>
+                            </div> 
+                        </div>
+                    )}
+                    
+                    {/* Submit new recipe form data */}
+                    <button type="submit" className="form-btns p-2 mt-4">Save Recipe</button>
+
+                    {/* Successful Submission Message */}
+                    {successMessage && <div className="success-message">{successMessage}</div>}
+                
+                </form>
             </div>
-
-            <div>
-                <input 
-                    placeholder="Enter instructions"
-                    type="text"
-                    value={instructionInput}
-                    onChange={(e) => {setInstructionInput(e.target.value)}}
-                    onKeyDown={handleInstructionKeyPress}
-                />
-                <button type="button" onClick={addInstruction}>Add Instruction</button>
-                <ol>
-                    {instructions.map((instruction, index) => (
-                        <li key={index}>{instruction}</li>
-                    ))}
-                </ol>
-            </div>
-
-            <button type="submit">Save Recipe</button>
-
-            {/* Successful Submission Message */}
-            {successMessage && <div className="success-message">{successMessage}</div>}
-
-            {/* Submission Error Message */}
-            
-        </form>
+        </div>
+        
+        
     );
 }
 

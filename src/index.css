@@ -1,0 +1,57 @@
+/* src/index.css */
+@import "tailwindcss";
+
+/* Then, use Tailwind directives below */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Custom global styles */
+body {
+    font-family: 'MedievalSharp', sans-serif;
+}
+
+.form-headers {
+    @apply font-bold text-lg;
+    color: #2B2B2B;
+}
+.form-fields {
+    @apply border border-gray-500 rounded m-1 p-1 outline-none; 
+    background: #ddd9cc;
+}
+
+.form-btns {
+    @apply border border-gray-700 rounded-xl hover:shadow-lg;
+    background: #FA910C;
+    color: #2B2B2B;
+}
+
+.underline-animation {
+    position: relative;
+    display: inline-block;
+}
+
+.underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 3px;
+    left: 0;
+    background: currentColor;
+    transition: width 0.3s ease-in-out;
+}
+
+.underline-animation:hover::after {
+    width: 100%;
+}
+
+.custom-border {
+    background: linear-gradient(to right, #FA910C, #DBA36F, #FA910C);
+}
+
+.custom-form-input-style {
+    /* @apply rounded-xl pt-[6px] px-[5px]; */
+    @apply rounded-xl mb-4;
+}

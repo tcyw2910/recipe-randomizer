@@ -13,9 +13,13 @@ function Randomizer({ recipes }) {
     };
 
     return (
-        <div>
-            <h2>Recipe Randomizer</h2>
-            <button onClick={getRandomRecipe}>Pick a recipe!</button>
+        <div className="text-center">
+            <button 
+                className="bg-yellow-600 text-white rounded-lg p-3 border-2 border-gray-700 hover:bg-yellow-700 transition duration-200 mt-5" 
+                onClick={getRandomRecipe}
+            >
+                Pick a recipe!
+            </button>
 
             {randomRecipe && (
                 <div>

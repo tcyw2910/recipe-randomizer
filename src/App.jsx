@@ -49,15 +49,24 @@ function App() {
 
   return (
     <Router>
-      <div className="text-center mt-10">
-        <h1 className="text-4xl font-bold text-blue-600">Tailwind is working!</h1>
+      <div className="min-h-screen flex items-center justify-center bg-gray-300">
+        <div 
+        className="p-3 rounded-xl shadow-xl w-full max-w-4xl custom-border">
+          <div className="rounded-xl p-8" style={{ background: 'linear-gradient(to top, #58CEEF, #096BCC)'}}>
+            <div className="text-center mt-10">
+              <h1 className="text-4xl font-bold mb-1" style={{ color: '#FA910C'}}>Recipe Randomizer</h1>
+            </div>
+        
+            <Navbar />
+            
+            <Routes>
+              <Route path="/" element={<Randomizer recipes={recipes} />}></Route>
+              <Route path="/add-recipe" element={<RecipeForm addRecipe={setRecipes} />}></Route>
+              <Route path="/recipes" element={<RecipeList recipes={recipes} deleteRecipe={deleteRecipe} />}></Route>
+            </Routes>
+          </div>
+        </div>
       </div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Randomizer recipes={recipes} />}></Route>
-        <Route path="/add-recipe" element={<RecipeForm addRecipe={setRecipes} />}></Route>
-        <Route path="/recipes" element={<RecipeList recipes={recipes} deleteRecipe={deleteRecipe} />}></Route>
-      </Routes>
     </Router>
   );
 }
