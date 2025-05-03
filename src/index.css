@@ -22,9 +22,13 @@ body {
 }
 
 .form-btns {
-    @apply border border-gray-700 border-2 rounded-lg hover:shadow-lg;
+    @apply border border-gray-700 border-2 rounded-lg hover:shadow-lg transition duration-200 ease-in-out;
     background: #FA910C;
     color: #FDFFF8;
+}
+
+.form-btns:hover {
+    background: #FFB84C;
 }
 
 .underline-animation {
@@ -52,6 +56,5 @@ body {
 }
 
 .custom-form-input-style {
-    /* @apply rounded-xl pt-[6px] px-[5px]; */
-    @apply rounded-xl mb-4;
+    @apply rounded-xl;
 }

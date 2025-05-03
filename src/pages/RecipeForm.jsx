@@ -30,7 +30,7 @@ function RecipeForm( {addRecipe} ) {
                 addRecipe((prevRecipes) => [...prevRecipes, data]); // Update state in App.js
 
                 // Set success message
-                setSuccessMessage("Recipe added successfully");
+                setSuccessMessage("Recipe added successfully!");
 
                 // Clear form after successful submission
                 setTitle("");
@@ -86,7 +86,7 @@ function RecipeForm( {addRecipe} ) {
                 <form onSubmit={handleSubmit}>
                     {/* Recipe Title */}
                     <h3 className="form-headers">Recipe Title</h3>
-                    <div className="custom-border custom-form-input-style p-2 flex items-center justify-center">
+                    <div className="custom-border custom-form-input-style p-2 flex items-center justify-center mb-4">
                         {/* User enters the name of the recipe here */}
                         <input 
                             type="text"
@@ -100,7 +100,7 @@ function RecipeForm( {addRecipe} ) {
                     
                     {/* Description of recipe */}
                     <h3 className="form-headers">Description</h3>
-                    <div className="custom-border custom-form-input-style p-3 flex items-center justify-center pb-1">
+                    <div className="custom-border custom-form-input-style p-3 flex items-center justify-center pb-1 mb-4">
                         {/* User provides a short description on said recipe here */}
                         <textarea 
                             placeholder="Short description"
@@ -111,70 +111,80 @@ function RecipeForm( {addRecipe} ) {
                         />
                     </div>
 
-                    <div>
-                        <div className="flex justify-center items-center">
-                            <div className="custom-border custom-form-input-style w-75">
-                                <div className="flex items-center justify-center gap-2">
-                                    <input 
-                                        placeholder="Add Ingredient"
-                                        type="text"
-                                        value={ingredientInput}
-                                        onChange={(e) => setIngredientInput(e.target.value)}
-                                        onKeyDown={handleIngredientKeyPress}
-                                        className="form-fields w-1/2 mt-2"
-                                    />
-                                    <button 
-                                        type="button" 
-                                        onClick={addIngredient} 
-                                        className="form-btns p-1 px-3"
-                                    >
-                                        Add Ingredient
-                                    </button>
-                                </div>
+                    <div className="flex justify-center items-center mb-4">
+                        <div className="flex w-full max-w-xl">
+                            <div className="custom-border custom-form-input-style p-2 flex-grow-[3] w-3/4">
+                                <input 
+                                    placeholder="Add Ingredient"
+                                    type="text"
+                                    value={ingredientInput}
+                                    onChange={(e) => setIngredientInput(e.target.value)}
+                                    onKeyDown={handleIngredientKeyPress}        
+                                    className="form-fields w-full"
+                                />
+                            </div>
+
+                            <div className="flex items-center justify-center flex-grow w-1/4">
+                                <button 
+                                    type="button" 
+                                    onClick={addIngredient} 
+                                    className="form-btns ml-2 p-2"
+                                >
+                                    Add Ingredient
+                                </button>
+                            </div>
+                        </div>             
+                        
+                    </div>
+                      
+                    {/* If at least one item is detected in the list -> display ingredients container */}
+                    {ingredients.length > 0 && (
+                        <div className="flex justify-center items-center mb-4">
+                            <div className="custom-border custom-form-input-style p-2 w-full max-w-xl">
+                                <ul className="p-2 rounded" style={{ background: '#ddd9cc' }}>
+                                    {ingredients.map((ingredient, index) => (
+                                        <li key={index} className="mb-1">✦ {ingredient}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    )}
+                        
+                    {/* User enters instructions for recipe and is displayed in the container below when submitted. */}
+                    <div className="flex justify-center items-center mb-4 w-full">
+                        <div className="flex w-full max-w-xl">
+                            <div className="custom-border custom-form-input-style p-2 flex-grow-[3] w-3/4">
+                                <input 
+                                    placeholder="Enter instructions"
+                                    type="text"
+                                    value={instructionInput}
+                                    onChange={(e) => {setInstructionInput(e.target.value)}}
+                                    onKeyDown={handleInstructionKeyPress}
+                                    className="form-fields w-full"
+                                />
+                            </div>
+
+                            <div className="flex items-center justify-center flex-grow w-1/4">
+                                <button 
+                                    type="button" 
+                                    onClick={addInstruction} 
+                                    className="form-btns ml-2 p-2"
+                                >
+                                    Add Instruction
+                                </button>
                             </div>
                         </div>
                         
-                        {/* If at least one item is detected in the list -> display container */}
-                        {ingredients.length > 0 && (
-                            <div className="flex justify-center items-center">
-                                <div className="custom-border custom-form-input-style p-2 w-100">
-                                    <ul className="p-2 rounded" style={{ background: '#ddd9cc' }}>
-                                        {ingredients.map((ingredient, index) => (
-                                            <li key={index}>{ingredient}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="flex justify-center items-center">
-                        <div className="custom-border custom-form-input-style p-2 w-150">
-                            <input 
-                                placeholder="Enter instructions"
-                                type="text"
-                                value={instructionInput}
-                                onChange={(e) => {setInstructionInput(e.target.value)}}
-                                onKeyDown={handleInstructionKeyPress}
-                                className="form-fields w-140"
-                            />
-                            <button 
-                                type="button" 
-                                onClick={addInstruction} 
-                                className="form-btns ml-2 p-1"
-                            >
-                                Add Instruction
-                            </button>
-                        </div>
+                        
                     </div>  
 
                     {/* If at least one item is detected in the list -> display container */}
                     {instructions.length > 0 && (
                         <div className="flex justify-center items-center">
-                            <div className="custom-border custom-form-input-style p-2 w-full">
-                                <ol className="p2 rounded" style={{ background: '#ddd9cc' }}>
+                            <div className="custom-border custom-form-input-style p-2 w-full max-w-xl">
+                                <ol className="p2 rounded list-decimal list-inside marker:font-bold" style={{ background: '#ddd9cc' }}>
                                     {instructions.map((instruction, index) => (
-                                        <li key={index}>{instruction}</li>
+                                        <li key={index} className="mb-2 text-left p-2">{instruction}</li>
                                     ))}
                                 </ol>
                             </div> 
@@ -182,7 +192,7 @@ function RecipeForm( {addRecipe} ) {
                     )}
                     
                     {/* Submit new recipe form data */}
-                    <button type="submit" className="form-btns p-2 mt-4">Save Recipe</button>
+                    <button type="submit" className="form-btns p-2 mt-2">Save Recipe</button>
 
                     {/* Successful Submission Message */}
                     {successMessage && <div className="success-message">{successMessage}</div>}
