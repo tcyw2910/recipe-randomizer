@@ -6,15 +6,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom fonts */
+@font-face {
+    font-family: 'Pixel Code';
+    src: url('/fonts/ttf/PixelCode-Light.ttf') format('truetype');
+}
 
 /* Custom global styles */
 body {
-    font-family: 'MedievalSharp', sans-serif;
+    /* font-family: 'MedievalSharp', sans-serif; */
+    font-family: 'Pixel Code', monospace;
 }
 
 .form-headers {
     @apply font-bold text-lg;
     color: #2B2B2B;
+    /* margin-bottom: 1.5rem; */
 }
 .form-fields {
     @apply border border-gray-500 rounded m-1 p-1 outline-none; 
@@ -22,7 +29,7 @@ body {
 }
 
 .form-btns {
-    @apply border border-gray-700 border-2 rounded-lg hover:shadow-lg transition duration-200 ease-in-out;
+    @apply border border-gray-700 border-2 hover:shadow-lg transition duration-200 ease-in-out;
     background: #FA910C;
     color: #FDFFF8;
 }
@@ -52,9 +59,14 @@ body {
 }
 
 .custom-border {
-    background: linear-gradient(to right, #FA910C, #DBA36F, #FA910C);
+    /* background: linear-gradient(to right, #FA910C, #DBA36F, #FA910C); */
+    box-shadow: 
+        0 0 0 3px #C37B47,   /* First pixel layer */
+        0 0 0 6px #823709,    /* Second pixel layer */
+        0 0 0 9px #B14E03;    /* Third pixel layer */
+    margin: 1em 0;
 }
 
 .custom-form-input-style {
-    @apply rounded-xl;
+    /* @apply rounded-xl; */
 }
