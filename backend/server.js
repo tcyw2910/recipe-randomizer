@@ -72,3 +72,30 @@ app.delete("/recipes/:id", async (req, res) => {
         res.status(500).json({ error: "Failed to delete recipe" });
     } 
 });
+
+// PUT route to edit an existing recipe by ID
+app.put("/recipes/:id", async (req, res) => {
+    const { id } = req.params;
+    const { title, description, ingredients, instructions } = req.body;
+
+    // Check all fields are provided
+    if (!title || !description || !ingredients || !instructions) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
+
+    try {
+        const result = await pool.query(
+            "UPDATE recipes SET title = $1, description = $2,  ingredients = $3, instructions = $4 WHERE id = $5 RETURNING *",
+            [title, description, ingredients, instructions, id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: "Recipe not found" });
+        }
+
+        res.json(result.rows[0]); // Send back the updated recipe
+    } catch (err) {
+        console.error("Error updating recipe:", err);
+        res.status(500).json({ error: "Failed to update recipe" });
+    }
+});

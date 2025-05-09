@@ -81,12 +81,12 @@ function RecipeForm( {addRecipe} ) {
     };
 
     return (
-        <div className="container mx-auto mt-5 text-center custom-border p-2 rounded-xl">
-            <div className="bg-red-500 p-4" style={{ background: '#EAA965' }}>
+        <div className="text-center custom-border">
+            <div className="p-4" style={{ background: '#EAA965' }}>
                 <form onSubmit={handleSubmit}>
                     {/* Recipe Title */}
                     <h3 className="form-headers">Recipe Title</h3>
-                    <div className="custom-border custom-form-input-style p-2 flex items-center justify-center mb-4">
+                    <div className="custom-border custom-form-input-style flex items-center justify-center mb-4">
                         {/* User enters the name of the recipe here */}
                         <input 
                             type="text"
@@ -100,7 +100,7 @@ function RecipeForm( {addRecipe} ) {
                     
                     {/* Description of recipe */}
                     <h3 className="form-headers">Description</h3>
-                    <div className="custom-border custom-form-input-style p-3 flex items-center justify-center pb-1 mb-4">
+                    <div className="custom-border custom-form-input-style flex items-center justify-center pb-1 mb-4">
                         {/* User provides a short description on said recipe here */}
                         <textarea 
                             placeholder="Short description"
@@ -113,7 +113,7 @@ function RecipeForm( {addRecipe} ) {
 
                     <div className="flex justify-center items-center mb-4">
                         <div className="flex w-full max-w-xl">
-                            <div className="custom-border custom-form-input-style p-2 flex-grow-[3] w-3/4">
+                            <div className="custom-border custom-form-input-style flex-grow-[3] w-3/4">
                                 <input 
                                     placeholder="Add Ingredient"
                                     type="text"
@@ -140,8 +140,8 @@ function RecipeForm( {addRecipe} ) {
                     {/* If at least one item is detected in the list -> display ingredients container */}
                     {ingredients.length > 0 && (
                         <div className="flex justify-center items-center mb-4">
-                            <div className="custom-border custom-form-input-style p-2 w-full max-w-xl">
-                                <ul className="p-2 rounded" style={{ background: '#ddd9cc' }}>
+                            <div className="custom-border custom-form-input-style w-full max-w-xl">
+                                <ul className="p-1" style={{ background: '#ddd9cc' }}>
                                     {ingredients.map((ingredient, index) => (
                                         <li key={index} className="mb-1">✦ {ingredient}</li>
                                     ))}
@@ -153,7 +153,7 @@ function RecipeForm( {addRecipe} ) {
                     {/* User enters instructions for recipe and is displayed in the container below when submitted. */}
                     <div className="flex justify-center items-center mb-4 w-full">
                         <div className="flex w-full max-w-xl">
-                            <div className="custom-border custom-form-input-style p-2 flex-grow-[3] w-3/4">
+                            <div className="custom-border custom-form-input-style flex-grow-[3] w-3/4">
                                 <input 
                                     placeholder="Enter instructions"
                                     type="text"
@@ -182,7 +182,7 @@ function RecipeForm( {addRecipe} ) {
                     {instructions.length > 0 && (
                         <div className="flex justify-center items-center">
                             <div className="custom-border custom-form-input-style p-2 w-full max-w-xl">
-                                <ol className="p2 rounded list-decimal list-inside marker:font-bold" style={{ background: '#ddd9cc' }}>
+                                <ol className="p-1 list-decimal list-inside marker:font-bold" style={{ background: '#ddd9cc' }}>
                                     {instructions.map((instruction, index) => (
                                         <li key={index} className="mb-2 text-left p-2">{instruction}</li>
                                     ))}
